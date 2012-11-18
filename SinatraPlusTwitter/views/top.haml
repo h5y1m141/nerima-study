@@ -1,0 +1,9 @@
+%html
+  %head
+    %title Twitter(gem)を使ったSinatraアプリ
+    %link{:href => "bootstrap.min.css", :rel => "stylesheet"}
+  %body
+  %h1= "My Twitter Timeline"
+  %ul
+    -@home_timeline.each do |tl|
+      %li= tl.text
