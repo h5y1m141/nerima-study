@@ -1,21 +1,23 @@
-# Twitterの自分のtimelineを表示するためにSinatra+twitter(gem)を活用
-
 ![タイトルイメージ](https://github.com/downloads/h5y1m141/nerima-study/sinatra-plus-twitter.012.png)
 
+
+----------
+
+
 ## 狙い
-前回はSinatraでtwitterのpublic timelineを表示するアプリを作って、Sinataraの基礎的な仕組みを学んだので今回は自分のtimelineを表示するための方法について理解する
+前回はSinatraでtwitterのpublic timelineを表示するアプリを作りましたが、今回は自分のtimelineを表示するアプリ作成を通じて以下について学びます
 
 + twitter gemの活用方法
-+ 前回まで使ったテンプレートエンジンのerbに加えて、別のテンプレートエンジンの haml について理解する
++ 前回まで使ったテンプレートエンジンのerb とは異なるテンプレートエンジンの haml について理解する
 
 ## twitter gemの利用方法について理解する
-SinatraからTwitter APIを利用しやすいgemとしてtwitterというものがあるのでまずはそちらの使い方について説明します。
+SinatraからTwitter APIを利用するのにいくつかの手段があります。直感的に理解しやすいtwitterとgemライブラリを利用するのでまずはその使い方について解説します
 
 
 
-### Twitter API利用のためのKeyの確認
+### Twitter API利用のためのアプリケーション登録
 
-TwitterAPIを利用してChrome拡張機能を利用するアプリを作った際に
+TwitterAPIを利用してChrome拡張機能を利用するアプリを作った時の手順に従ってアプリケーション登録します。詳細の手順は[こちら](https://github.com/h5y1m141/nerima-study/SinatraPlusTwitter/twitter-api-regist.md)を参照してください
 
 ### 作業用フォルダの事前準備
 
@@ -28,11 +30,34 @@ cd ~/Documents/
 mkdir 20121121 20121121/views 20121121/public
 ```
 
+![作業画面１](https://github.com/downloads/h5y1m141/nerima-study/sinatra-plus-twitter.012.png)
+
+フォルダが作成できてるかどうか確認するために以下のようなコマンドを入力します
+
+```sh
+ls -al 20121121
+```
+
+上記コマンドは「20121121」フォルダの中身を表示するという意味なのですが「public」と「views」というフォルダ名が表示されていればOKです
+
+![確認画面](https://github.com/downloads/h5y1m141/nerima-study/sinatra-plus-twitter.012.png)
+
 フォルダ作成が完了したら、「config.yaml」と「Gemfile」と「console.rb」というファイルを作成します
 
 ```sh
+cd ~/Documents/20121121
 touch config.yaml Gemfile console.rb
 ```
+
+作業完了した後に
+
+```sh
+ls -al
+```
+
+と入力して「config.yaml」と「Gemfile」と「console.rb」というファイルが表示されると思います。
+
+![作業画面2](https://github.com/downloads/h5y1m141/nerima-study/sinatra-plus-twitter.012.png)
 
 なおこの状態では「config.yaml」と「Gemfile」と「console.rb」それぞれ中身は空っぽの状態になってますので、このファイルをSublimeText2で編集していきます
 
@@ -51,9 +76,13 @@ gem 'sinatra'
 gem 'twitter'
 gem 'haml'
 ```
-config.yamlには以下を記述します
+config.yamlには以下を記述します。記述する際に2点注意事項があります
 
-(参考)Twitter APIを利用する際のCONSUMER KEY等の情報をこれまでプログラム本体に埋め込んでいました。設定情報となるものを別のファイルで管理して、それをプログラムから読み取る形式にしておくことで再利用しやすいプログラムになるので今回はそのやり方を取り入れます
+1. 2行目以降のconsumer_key,consumer_secret,oauth_token,oauth_token_secretのそれぞれの先頭行に半角スペースを1ついれます。(タブは禁止です）
+
+2. コロン(:)の後に必ず半角スペースを1ついれます。
+※なおconsumer_key,consumer_secret,oauth_token,oauth_token_secretの文字の後の空白はいくつあってもOKです。今回のサンプルでは見やすくするために空白が複数入ってますが、特に空白入れなくてもOKです
+
 
 ```yaml
 config:
@@ -63,6 +92,9 @@ config:
  oauth_token_secret		: "YOUR OAUTH TOKEN SECRET"
 
 ```
+
+(参考情報)Twitter APIを利用する際のCONSUMER KEY等の情報をこれまでプログラム本体に埋め込んでいました。設定情報となるものを別のファイルで管理して、それをプログラムから読み取る形式にしておくことで再利用しやすいプログラムになるので今回はそのやり方を取り入れます
+
 
 console.rbには以下を記述します
 
@@ -93,10 +125,78 @@ p Twitter.home_timeline
 
 
 ### 動作確認
-ターミナル上で
+SublimeText2での入力が完了したらターミナル上で以下のように入力します
 
 ```sh
 cd ~/Documents/20121121
+bundle install
 ruby ./console.rb
+```
 
+以下のように、ターミナル上にTwitterのAPIを通じて取得できた自分のtimelineの情報が表示されればOKです。
+
+![作業画面2](https://github.com/downloads/h5y1m141/nerima-study/sinatra-plus-twitter.012.png)
+
+
+## Sinatraでtwitterのtimelineを表示する
+
+先ほど作ったconsole.rb のプログラムをベースにして、SinatraでTwitterの自分のタイムラインを表示できるようにします
+
+### 事前準備
+
+「20121121」フォルダ配下にapp.rbというファイルを作るために以下コマンドを入力します
+
+```sh
+cd ~/Documents/20121121
+touch app.rb views/top.erb
+```
+
+SublimeText2上で「20121121」フォルダが展開されていると思いますので、その中にapp.rbが作成されていることを確認して、このファイルに以下を記述します
+
+```ruby
+require 'twitter'
+require 'sinatra'
+require 'haml'
+require 'yaml'
+
+class MyApp < Sinatra::Base
+  before do
+    twitter_conf = YAML.load_file("config.yaml")
+	Twitter.configure do |config|
+      config.consumer_key       = twitter_conf["config"]["consumer_key"]
+      config.consumer_secret    = twitter_conf["config"]["consumer_secret"]
+      config.oauth_token        = twitter_conf["config"]["oauth_token"]
+      config.oauth_token_secret = twitter_conf["config"]["oauth_token_secret"]
+	end
+  end
+
+  get '/' do
+    @home_timeline = Twitter.home_timeline
+    erb :top
+  end
+end
+
+MyApp.run! :host => 'localhost', :port => 4567
+```
+top.erbには以下を記述します
+
+```ruby
+<html>
+  <head>
+    <title>Twitter(gem)を使ったSinatraアプリ</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>	
+  <h1>Twitter Timeline(use erb)</h1>
+  <ul>
+    <%
+      @home_timeline.each do |items|
+    %>
+    <li>
+      <%= items["text"] %>
+    </li>
+    <% end %>
+  </ul>
+</body>
+</html>
 ```
