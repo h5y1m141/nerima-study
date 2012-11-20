@@ -27,8 +27,8 @@ TwitterAPIを利用してChrome拡張機能を利用するアプリを作った�
 cd ~/Documents/
 mkdir 20121121 20121121/views 20121121/public
 ```
-
-![作業画面１](https://github.com/h5y1m141/nerima-study/blob/master/SinatraPlusTwitter/capture/screen-shot-01.png)
+https://github.com/downloads/h5y1m141/nerima-study/
+![作業画面１](https://github.com/downloads/h5y1m141/nerima-study/screen-shot-01.png)
 
 フォルダが作成できてるかどうか確認するために以下のようなコマンドを入力します
 
@@ -38,7 +38,7 @@ ls -al 20121121
 
 上記コマンドは「20121121」フォルダの中身を表示するという意味なのですが「public」と「views」というフォルダ名が表示されていればOKです
 
-![確認画面](https://github.com/h5y1m141/nerima-study/blob/master/SinatraPlusTwitter/capture/screen-shot-02.png)
+![確認画面](https://github.com/downloads/h5y1m141/nerima-study/screen-shot-02.png)
 
 フォルダ作成が完了したら、「config.yaml」と「Gemfile」と「console.rb」というファイルを作成します
 
@@ -55,7 +55,7 @@ ls -al
 
 と入力して「config.yaml」と「Gemfile」と「console.rb」というファイルが表示されると思います。
 
-![作業画面2](https://github.com/h5y1m141/nerima-study/blob/master/SinatraPlusTwitter/capture/screen-shot-03.png)
+![作業画面2](https://github.com/downloads/h5y1m141/nerima-study/screen-shot-03.png)
 
 なおこの状態では「config.yaml」と「Gemfile」と「console.rb」それぞれ中身は空っぽの状態になってますので、このファイルをSublimeText2で編集していきます
 
@@ -133,7 +133,7 @@ ruby ./console.rb
 
 以下のように、ターミナル上にTwitterのAPIを通じて取得できた自分のtimelineの情報が表示されればOKです。
 
-![TwitterのAPIを通じて取得できた自分のtimelineの情報がターミナル上に表示される](https://github.com/h5y1m141/nerima-study/blob/master/SinatraPlusTwitter/capture/screen-shot-04.png)
+![TwitterのAPIを通じて取得できた自分のtimelineの情報がターミナル上に表示される](https://github.com/downloads/h5y1m141/nerima-study/screen-shot-04.png)
 
 
 ## Sinatraでtwitterのtimelineを表示する
@@ -151,7 +151,7 @@ touch app.rb views/top.erb
 
 以下のような画面になればOKです
 
-![touch app.rb top.erb した結果](https://github.com/h5y1m141/nerima-study/blob/master/SinatraPlusTwitter/capture/screen-shot-05.png)
+![touch app.rb top.erb した結果](https://github.com/downloads/h5y1m141/nerima-study/screen-shot-05.png)
 
 SublimeText2上で「20121121」フォルダが展開されていると思いますので、その中にapp.rbが作成されていることを確認して、このファイルに以下を記述します
 
