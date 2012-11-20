@@ -27,7 +27,7 @@ TwitterAPIを利用してChrome拡張機能を利用するアプリを作った�
 cd ~/Documents/
 mkdir 20121121 20121121/views 20121121/public
 ```
-https://github.com/downloads/h5y1m141/nerima-study/
+
 ![作業画面１](https://github.com/downloads/h5y1m141/nerima-study/screen-shot-01.png)
 
 フォルダが作成できてるかどうか確認するために以下のようなコマンドを入力します
@@ -158,7 +158,6 @@ SublimeText2上で「20121121」フォルダが展開されていると思いま
 ```ruby
 require 'twitter'
 require 'sinatra'
-require 'haml'
 require 'yaml'
 
 class MyApp < Sinatra::Base
@@ -202,3 +201,21 @@ top.erbには以下を記述します
 </body>
 </html>
 ```
+
+### 動作確認する
+
+app.rb と top.erb の記述が終わったらターミナル上で以下のように入力してSinatarの動作確認をします
+
+```sh
+ruby ./app.rb
+```
+
+![Sinatraの動作確認](https://github.com/downloads/h5y1m141/nerima-study/screen-shot-06.png)
+
+Sinatraが起動できたら、ブラウザを起動して
+
+http://locahost:4567/
+
+にアクセスして以下のように自分のタイムラインが表示されればOKです
+
+![ブラウザでの表示](https://github.com/downloads/h5y1m141/nerima-study/screen-shot-07.png)
