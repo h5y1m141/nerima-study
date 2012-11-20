@@ -5,19 +5,17 @@
 
 
 ## 狙い
-前回はSinatraでtwitterのpublic timelineを表示するアプリを作りましたが、今回は自分のtimelineを表示するアプリ作成を通じて以下について学びます
+前回はSinatraでtwitterのpublic timelineを表示するアプリを作りましたが、今回は自分のtimelineを表示するアプリ作成方法について学びます
 
-+ twitter gemの活用方法
-+ 前回まで使ったテンプレートエンジンのerb とは異なるテンプレートエンジンの haml について理解する
 
 ## twitter gemの利用方法について理解する
-SinatraからTwitter APIを利用するのにいくつかの手段があります。直感的に理解しやすいtwitterとgemライブラリを利用するのでまずはその使い方について解説します
+SinatraからTwitter APIを利用するのにいくつかの手段があります。直感的に理解しやすいtwitterというgemライブラリを利用するのでまずはその使い方について解説します
 
 
 
 ### Twitter API利用のためのアプリケーション登録
 
-TwitterAPIを利用してChrome拡張機能を利用するアプリを作った時の手順に従ってアプリケーション登録します。詳細の手順は[こちら](https://github.com/h5y1m141/nerima-study/SinatraPlusTwitter/twitter-api-regist.md)を参照してください
+TwitterAPIを利用してChrome拡張機能を利用するアプリを作った時の手順に従ってアプリケーション登録します。詳細の手順は[こちら](https://github.com/h5y1m141/nerima-study/blob/master/SinatraPlusTwitter/twitter-api-regist.md)を参照してください
 
 ### 作業用フォルダの事前準備
 
@@ -30,7 +28,7 @@ cd ~/Documents/
 mkdir 20121121 20121121/views 20121121/public
 ```
 
-![作業画面１](https://github.com/downloads/h5y1m141/nerima-study/sinatra-plus-twitter.012.png)
+![作業画面１](https://github.com/h5y1m141/nerima-study/blob/master/SinatraPlusTwitter/capture/screen-shot-01.png)
 
 フォルダが作成できてるかどうか確認するために以下のようなコマンドを入力します
 
@@ -40,7 +38,7 @@ ls -al 20121121
 
 上記コマンドは「20121121」フォルダの中身を表示するという意味なのですが「public」と「views」というフォルダ名が表示されていればOKです
 
-![確認画面](https://github.com/downloads/h5y1m141/nerima-study/sinatra-plus-twitter.012.png)
+![確認画面](https://github.com/h5y1m141/nerima-study/blob/master/SinatraPlusTwitter/capture/screen-shot-02.png)
 
 フォルダ作成が完了したら、「config.yaml」と「Gemfile」と「console.rb」というファイルを作成します
 
@@ -57,7 +55,7 @@ ls -al
 
 と入力して「config.yaml」と「Gemfile」と「console.rb」というファイルが表示されると思います。
 
-![作業画面2](https://github.com/downloads/h5y1m141/nerima-study/sinatra-plus-twitter.012.png)
+![作業画面2](https://github.com/h5y1m141/nerima-study/blob/master/SinatraPlusTwitter/capture/screen-shot-03.png)
 
 なおこの状態では「config.yaml」と「Gemfile」と「console.rb」それぞれ中身は空っぽの状態になってますので、このファイルをSublimeText2で編集していきます
 
@@ -135,7 +133,7 @@ ruby ./console.rb
 
 以下のように、ターミナル上にTwitterのAPIを通じて取得できた自分のtimelineの情報が表示されればOKです。
 
-![作業画面2](https://github.com/downloads/h5y1m141/nerima-study/sinatra-plus-twitter.012.png)
+![TwitterのAPIを通じて取得できた自分のtimelineの情報がターミナル上に表示される](https://github.com/h5y1m141/nerima-study/blob/master/SinatraPlusTwitter/capture/screen-shot-04.png)
 
 
 ## Sinatraでtwitterのtimelineを表示する
@@ -150,6 +148,10 @@ ruby ./console.rb
 cd ~/Documents/20121121
 touch app.rb views/top.erb
 ```
+
+以下のような画面になればOKです
+
+![touch app.rb top.erb した結果](https://github.com/h5y1m141/nerima-study/blob/master/SinatraPlusTwitter/capture/screen-shot-05.png)
 
 SublimeText2上で「20121121」フォルダが展開されていると思いますので、その中にapp.rbが作成されていることを確認して、このファイルに以下を記述します
 
